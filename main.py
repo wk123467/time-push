@@ -182,7 +182,7 @@ def lizhi():
 def tip():
     if (tianqi_API!="否"):
         conn = http.client.HTTPSConnection('apis.tianapi.com')  #接口域名
-        params = urllib.parse.urlencode({'key':e8a885561b1bc1bbf1930308ac584d01,'city':city, 'type':'1'})
+        params = urllib.parse.urlencode({'key':'e8a885561b1bc1bbf1930308ac584d01','city':city, 'type':'1'})
         headers = {'Content-type':'application/x-www-form-urlencoded'}
         conn.request('POST','/tianqi/index',params,headers)
         tianapi = conn.getresponse()
