@@ -190,7 +190,7 @@ def tip():
         data = result.decode('utf-8')
         dict_data = json.loads(data)
         #print(dict_data)
-        tips = data["result"][0]["tips"]
+        tips = data[0]["result"]["tips"]
         return "", tips
     else:
         return "",""
