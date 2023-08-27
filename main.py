@@ -185,13 +185,17 @@ def tip():
         params = urllib.parse.urlencode({'key':'e8a885561b1bc1bbf1930308ac584d01','city':city, 'type':'1'})
         headers = {'Content-type':'application/x-www-form-urlencoded'}
         conn.request('POST','/tianqi/index',params,headers)
-        tianapi = conn.getresponse()
-        result = tianapi.read()
-        data = result.decode('utf-8')
-        dict_data = json.loads(data)
-        #print(dict_data)
-        tips = data[0]["result"]["tips"]
-        return "", tips
+        res = conn.getresponse()
+        data = res.read()
+        data = json.loads(data)
+        #print(data['result']['tips'])
+        tips = data['result']['tips']
+        temp = ""
+        for str in tips:
+            temp += str
+            if str == "。":
+                break
+        return '',temp
     else:
         return "",""
 
@@ -223,7 +227,7 @@ def send_message(to_user, access_token, city_name, weather, max_temperature, min
         "topcolor": "#FF0000",
         "data": {
             "date": {
-                "value": "{} {}".format(today, week),
+                "value": "{}  {}".format(today, week),
                 "color": get_color()
             },
             "city": {
@@ -311,7 +315,7 @@ def send_message(to_user, access_token, city_name, weather, max_temperature, min
 
 if __name__ == "__main__":
     try:
-        with open("./config.json", encoding="utf-8") as f:
+        with open("C:\\Users\\wk\\Desktop\\time-push\\config.json", encoding="utf-8") as f:
             config = eval(f.read())
     except FileNotFoundError:
         print("推送消息失败，请检查config.txt文件是否与程序位于同一路径")
